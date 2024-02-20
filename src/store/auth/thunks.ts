@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { logoutFirebase, registerWithEmail, signInWithGoogle, singInWithEmailAndPassword } from '../../firebase/providers';
 import { LoginData, RegisterData } from '../../auth/types/types';
+import { clearNotesOnLogout } from '../journal';
 
 interface AuthenticationPayload {
   email: string;
@@ -41,7 +42,8 @@ export const startLoginWithEmailAndPasswordAction = createAsyncThunk(
 export const startLogoutAction = createAsyncThunk(
 
   'auth/startLogoutAction',
-  async () => {
+  async (_, { dispatch }) => {
+    dispatch( clearNotesOnLogout() );
     await logoutFirebase();
   }
 

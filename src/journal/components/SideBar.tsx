@@ -1,19 +1,14 @@
-import { TurnedInNot } from "@mui/icons-material";
 import {
   Box,
   Divider,
   Drawer,
-  Grid,
   List,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
   Toolbar,
   Typography,
 } from "@mui/material";
 import { FC } from "react";
 import { useAppSelector } from "../../hooks";
+import { SideBarItem } from ".";
 
 interface SideBarProps {
   drawerWidth: number;
@@ -22,6 +17,7 @@ interface SideBarProps {
 export const SideBar: FC<SideBarProps> = ({ drawerWidth }) => {
 
   const { displayName } = useAppSelector(state => state.auth);
+  const { notes } = useAppSelector(state => state.journal);
 
   return (
     <Box
@@ -44,18 +40,8 @@ export const SideBar: FC<SideBarProps> = ({ drawerWidth }) => {
         <Divider />
 
         <List>
-          {["Enero", "Febrero", "Marzo", "Abril"].map((text) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  <TurnedInNot />
-                </ListItemIcon>
-                <Grid container>
-                  <ListItemText primary={text} />
-                  <ListItemText secondary={"Que onda camarada"} />
-                </Grid>
-              </ListItemButton>
-            </ListItem>
+          {notes.map((note) => (
+            <SideBarItem key={note.id} {...note} />
           ))}
         </List>
       </Drawer>

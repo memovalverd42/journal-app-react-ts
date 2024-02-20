@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from ".";
 import { FirebaseAuth } from "../firebase/config";
 import { useEffect } from "react";
 import { login, logout } from "../store/auth";
+import { startLoadingNotes } from "../store/journal";
 
 export const useCheckAuth = () => {
 
@@ -22,6 +23,8 @@ export const useCheckAuth = () => {
         photoURL: photoURL!,
         uid: uid!
       }));
+
+      dispatch( startLoadingNotes() );
     });
     
   });

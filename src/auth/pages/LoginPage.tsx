@@ -11,13 +11,18 @@ import { startGoogleSignInAction, startLoginWithEmailAndPasswordAction } from ".
 import { LoginData } from "../types/types";
 
 
+const formData: LoginData = {
+  email: '',
+  password: ''
+}
+
 export const LoginPage = () => {
 
   const dispatch = useAppDispatch();
 
   const { status, errorMessage } = useAppSelector(state => state.auth)
 
-  const { email, password, onInputChange, formState } = useForm<LoginData>();
+  const { email, password, onInputChange, formState } = useForm<LoginData>(formData);
 
   const isAuthenticating = useMemo( () => status === 'cheking', [status] );
 

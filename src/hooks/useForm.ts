@@ -26,6 +26,10 @@ export const useForm = <T extends Record<string, any>>(
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formState]);
 
+  useEffect(() => {
+    setFormState(initialForm);
+  }, [ initialForm ])
+  
   const isFormValid = useMemo(() => {
     for (const formValue of Object.keys(formValidation)) {
       // @ts-ignore
