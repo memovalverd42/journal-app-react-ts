@@ -16,4 +16,12 @@ module.exports = {
     ],
     "no-alert": "off"
   },
+  "overrides": [
+    {
+      "files": ["tests/**/*"],
+      "env": {
+        "jest": true
+      }
+    }
+  ]
 }

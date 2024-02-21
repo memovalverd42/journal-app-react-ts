@@ -1,9 +1,21 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 import { Note } from ".";
-import { doc, setDoc, collection, deleteDoc } from "firebase/firestore/lite";
+import { doc, setDoc, collection, deleteDoc } from "firebase/firestore";
 import { FirebaseDB } from "../../firebase/config";
 import { fileUpload, loadNotes } from "../../helper";
+
+
+// export const startNewNote = () => {
+
+//   return async ( dispatch: Dispatch<UnknownAction>, getState: () => unknown ) => {
+//     dispatch( closeNote() );
+
+//     const state = getState() as RootState;
+//     const uid = state .auth.uid;
+//   }
+
+// }
 
 export const startLoadingNotes = createAsyncThunk(
   'journal/startLoadingNotes',
@@ -32,7 +44,10 @@ export const startCreateNewNote = createAsyncThunk(
     }
 
     const newDoc = doc( collection( FirebaseDB, `${uid}/journal/notes` ) );
-    await setDoc( newDoc, newNote );
+    
+    // await setDoc( newDoc, newNote );
+    // para los tests
+    setDoc( newDoc, newNote );
 
     newNote.id = newDoc.id;
 

@@ -7,7 +7,8 @@ import { CloudinaryResponse } from ".";
  */
 export const fileUpload = async ( file: File ) => {
 
-  if ( !file ) throw new Error('No se ha seleccionado un archivo');
+  // if ( !file ) throw new Error('No se ha seleccionado un archivo');
+  if ( !file ) return null;
 
   const cloudUrl = 'https://api.cloudinary.com/v1_1/dfwojerdl/upload';
 
@@ -24,7 +25,8 @@ export const fileUpload = async ( file: File ) => {
     });
 
     
-    if ( !response.ok ) throw new Error('Error al subir la imagen');
+    // if ( !response.ok ) throw new Error('Error al subir la imagen');
+    if ( !response.ok ) return null;
     
     const data: CloudinaryResponse = await response.json();
     

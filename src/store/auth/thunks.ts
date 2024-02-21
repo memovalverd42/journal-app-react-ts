@@ -2,23 +2,21 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { logoutFirebase, registerWithEmail, signInWithGoogle, singInWithEmailAndPassword } from '../../firebase/providers';
 import { LoginData, RegisterData } from '../../auth/types/types';
 import { clearNotesOnLogout } from '../journal';
-
-interface AuthenticationPayload {
-  email: string;
-  password: string;
-}
+import { checkingCredentials } from '.';
   
 export const chekingAuthenticationAction = createAsyncThunk(
-    'auth/chekingAuthentication',
-    async ( payload: AuthenticationPayload ) => {
-      console.log(payload);
-    }
-)
+  'auth/chekingAuthentication',
+  async (_, {dispatch}  ) => {
+    dispatch( checkingCredentials() );
+  }
+);
 
 export const startGoogleSignInAction = createAsyncThunk(
     'auth/startGoogleSignIn',
     async () => {
       const response = await signInWithGoogle();
+
+
       return response;
     }
 );

@@ -7,6 +7,7 @@ import {
 } from ".";
 import { UserCredentialsGoogleResponse } from "../../firebase/providers";
 
+
 export interface AuthState {
   status: "cheking" | "not-authenticated" | "authenticated";
   uid: string | null;
@@ -29,7 +30,7 @@ export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    chekingAuthenticationAction: (state) => {
+    checkingCredentials: (state) => {
       state.status = "cheking";
     },
     login: (
@@ -41,7 +42,7 @@ export const authSlice = createSlice({
       state.email = payload.email!;
       state.displayName = payload.displayName!;
       state.photoURL = payload.photoURL!;
-      state.errorMessage = null;
+      state.errorMessage = payload.message!;
     },
     logout: ( state ) => {
       state.status = "not-authenticated";
@@ -122,4 +123,4 @@ export const authSlice = createSlice({
   },
 });
 
-export const { login, logout } = authSlice.actions;
+export const { checkingCredentials, login, logout } = authSlice.actions;

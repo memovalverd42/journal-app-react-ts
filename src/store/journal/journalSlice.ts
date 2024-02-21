@@ -38,13 +38,14 @@ export const journalSlice = createSlice({
     clearNotesOnLogout: ( state ) => {
       state.notes = [];
       state.active = null;
-    }
+    },
   },
   extraReducers: ( builder ) => {
     builder
       .addCase( startCreateNewNote.pending, ( state ) => {
         state.isSaving = true;
       })
+
       .addCase( startCreateNewNote.fulfilled, ( state, { payload }) => {
         state.isSaving = false;
         state.active = payload;

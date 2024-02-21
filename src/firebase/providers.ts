@@ -7,12 +7,11 @@ import { LoginData, RegisterData } from "../auth/types/types";
 const googleProvider = new GoogleAuthProvider();
 
 export interface UserCredentialsGoogleResponse {
-  ok: boolean;
   displayName?: string | null;
   email?: string | null;
   photoURL?: string | null;
   uid?: string | null;
-  message?: string;
+  message?: string | null;
 }
 
 export const signInWithGoogle = async (): Promise<UserCredentialsGoogleResponse> => {
@@ -23,7 +22,6 @@ export const signInWithGoogle = async (): Promise<UserCredentialsGoogleResponse>
     const { displayName, email, photoURL, uid } = result.user;
 
     return {
-      ok: true,
       displayName,
       email,
       photoURL,
@@ -44,7 +42,6 @@ export const registerWithEmail = async ({ email, password, displayName: name }: 
     await updateProfile( FirebaseAuth.currentUser!, { displayName: name } );
     
     return {
-      ok: true,
       displayName: FirebaseAuth.currentUser!.displayName!,
       email: userEmail,
       photoURL,
@@ -63,7 +60,6 @@ export const singInWithEmailAndPassword = async ( { email, password }: LoginData
     const response = await signInWithEmailAndPassword( FirebaseAuth, email, password );
 
     return {
-      ok: true,
       displayName: response.user.displayName!,
       email: response.user.email!,
       photoURL: response.user.photoURL!,
