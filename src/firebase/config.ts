@@ -16,6 +16,7 @@ const {
   VITE_FIREBASE_APPID,
 } = getEvironments();
 
+
 const firebaseConfig = {
   apiKey: VITE_FIREBASE_APIKEY,
   authDomain: VITE_FIREBASE_AUTHDOMAIN,

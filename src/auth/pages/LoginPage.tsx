@@ -28,16 +28,22 @@ export const LoginPage = () => {
 
   const onSubmit = ( event: FormEvent ) => {
     event.preventDefault();
+    console.log(formState);
     dispatch( startLoginWithEmailAndPasswordAction( formState ) );
   }
   
   const onGoogleSignIn = () => {
-    dispatch(startGoogleSignInAction());
+    // console.log('google sign in');
+    dispatch( startGoogleSignInAction() );
   }
 
   return (
     <AuthLayout title="Login">
-      <form onSubmit={ onSubmit } className="animate__animated animate__fadeIn animate__faster">
+      <form 
+        aria-label="login-form"
+        onSubmit={ onSubmit } 
+        className="animate__animated animate__fadeIn animate__faster"
+      >
         <Grid container>
           <Grid item xs={12} sx={{ mt: 2 }}>
             <TextField
@@ -58,6 +64,9 @@ export const LoginPage = () => {
               placeholder="password"
               fullWidth
 
+              inputProps={{
+                'data-testid': "password"
+              }}
               name="password"
               value={ password }
               onChange={ onInputChange }
@@ -89,6 +98,7 @@ export const LoginPage = () => {
               <Button 
                 disabled={ isAuthenticating }
                 variant="contained" 
+                aria-label="google btn"
                 fullWidth
                 onClick={ onGoogleSignIn }
               >

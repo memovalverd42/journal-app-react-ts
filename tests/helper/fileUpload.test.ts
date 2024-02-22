@@ -30,7 +30,7 @@ describe('Pruebas en carga de archivos', () => {
     const imageId = segments[segments.length - 1].replace('.jpg', '');
     await cloudinary.api.delete_resources([ 'journal/' + imageId ]);
 
-  });
+  }, 10000);
 
   test('dede de retornar null', async() => {
       
